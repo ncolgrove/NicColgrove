@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Nic Colgrove</title>
+    
+    <!--Icons -->
+    <!--
+        WILL NEED TO DEFINE
+            <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://proola.com/assets/ico/bub.jpg">
+            <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://proola.com/assets/ico/bub.jpg">
+            <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://proola.com/assets/ico/bub.jpg">
+            <link rel="apple-touch-icon-precomposed" href="http://proola.com/assets/ico/bub.jpg">
+            <link rel="shortcut icon" href="http://proola.com/assets/ico/bub.jpg">
+    -->
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Bootstrap links -->    
+    <script type="text/javascript" src="js/lib/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.scrollTo.js"></script>
+    <script type="text/javascript" src="js/jquery.waypoints.js"></script>
+
+    
+    <link rel="stylesheet" href="css/bootstrap-3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-3.0/css/bootstrap-theme.min.css">
+    
+    
+    <script src="css/bootstrap-3.0/js/bootstrap.min.js"></script>
+    
+    <link href="_template_CSS.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet" media="screen">
+<!--
+    <script type="text/javascript" src="_template_JS.js"></script>
+-->    
+
+    
+    <script src="js/jquery.parallax.js"></script>
+    <link href="js/jquery.parallax.css" rel="stylesheet" media="screen">
+
+    
+    
+    <script type="text/javascript">
+
+        
+					String.prototype.format = function() {
+					  var args = arguments;
+					  return this.replace(/{(\d+)}/g, function(match, number) { 
+						return typeof args[number] != 'undefined'
+						  ? args[number]
+						  : match
+						;
+					  });
+					};			
+        
+        
+        
+    $(document).ready(function(){
+
+
+		var ua = navigator.userAgent,
+		isMobileWebkit = /WebKit/.test(ua) && /Mobile/.test(ua);
+
+
+		
+        /*
+        $('#nav').localScroll(800);
+        
+        //.parallax(xPosition, speedFactor, outerHeight) options:
+        //xPosition - Horizontal position of the element
+        //inertia - speed to move relative to vertical scroll. Example: 0.1 is one tenth the speed of scrolling, 2 is twice the speed of scrolling
+        //outerHeight (true/false) - Whether or not jQuery should use it's outerHeight option to determine when a section is in the viewport
+        */
+		
+		
+		if (isMobileWebkit) {
+		  $('html').addClass('mobile');
+		}
+
+
+        $('html:not(.mobile) #parallax-creator').parallax("50%", -1.1);
+        $('html:not(.mobile) .parallax-creator-img').parallax("50%", .5);
+
+
+        $('html:not(.mobile) #parallax-developer').parallax("50%", .9 );
+        $('html:not(.mobile) .parallax-developer-img').parallax("50%", .15);        
+        $('html:not(.mobile) .parallax-developer-code').parallax("50%", -3);  
+        
+        
+        $('html:not(.mobile) #parallax-leader').parallax("50%", .5 );
+        $('html:not(.mobile) .parallax-organizer-img').parallax("50%", .3 );
+        $('html:not(.mobile) .parallax-organizer-img2').parallax("50%", .3 );
+        
+            
+        /*
+        $('#second').parallax("50%", 0.1);
+        $('.bg').parallax("50%", 0.4);
+        $('#third').parallax("50%", 0.3);
+        */
+        
+    //SMOOTH SCROLLING    
+        $('.nav .scrollTo a').click(function(e) {
+            e.preventDefault();
+            to = $(this).attr('href');
+            scrollTo(to); 
+        });
+        
+    
+    //SET THE AUTO HIGHLIGHT IN THE TITLE BAR
+        function setActive(point){
+            $('.scrollTo').each( function(){
+                if( $(this).find('a[href="#' + point + '"]').length > 0){
+                    $(this).addClass('active');
+                }else{
+                    $(this).removeClass('active');
+                }
+            });
+        }
+            
+        
+    //SET WAYPOINTS FOR THE SCROLL
+        $('.navPoint')
+          .waypoint(function(direction) {
+            //var $links = $('a[href="#' + this.id + '"]');
+            //$links.toggleClass('active', direction === 'down');
+          }, {
+            //context: '#docs',
+            offset: '100%'
+          })
+          .waypoint(function(direction) {
+                //alert('hey');
+                setActive( this.id );
+            //var $links = $('a[href="#' + this.id + '"]');
+            //$links.toggleClass('active', direction === 'up');
+          }, {
+            //context: '#docs',
+            offset: function() {
+              return 80;//-$(this).height();
+            }
+          });
+
+        
+        /*function(direction) {
+            id = $(this).id;
+            alert(id);
+            $('.nav li').each(function(n,e){
+               $(this).removeClass('active'); 
+                
+                
+                //alert('Top of thing hit top of viewport.');
+            });
+        });
+        */
+        
+        
+         $('.pFilter').hover( function(){
+			classKey = $(this).attr('project-filter-key');
+			$('.project-host:not(.'+classKey+')').addClass('project-inactive');
+	   }, 
+	   function(){
+		    if( !$(this).hasClass('active') ){
+				classKey = $(this).attr('project-filter-key');
+				$('.project-host:not(.'+classKey+')').removeClass('project-inactive');		   
+			}
+	   });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                
+        $.getJSON( "index_projects.json", function( data ) {
+              var items = [];
+              var projectsHTML='';
+            
+            
+            
+              pageTemplate = $('#projectItem').html();	
+            
+              $.each( data.projects , function( key, d ) {
+                  projectsHTML=projectsHTML+pageTemplate.format(key, d.Title, d.Desc, d.Icon, d.Classes);
+                 
+                //items.push( "<li id='" + key + "'>" + val + "</li>" );
+              });
+
+              $('#projectList').html( projectsHTML );
+
+            
+            
+            
+                //ADD THE FADE HOVER OPTION
+                $('.fade').hover(
+                    function(){
+                        $(this).find('.caption').stop( false, true ).fadeIn(250);
+                    },
+                    function(){
+                        $(this).find('.caption').stop( false, true ).fadeOut(250);
+                    }
+                );    
+        });        
+        
+        
+        //ADD ELEMENTS TO THE PROJECT LIST
+        
+            
+        
+   
+        
+        
+       
+        
+        
+    })
+    
+    
+    
+    function scrollTo(elem){
+        /*
+            var top = $(elem).offset().top;
+            alert(top);
+            $('html, body').animate({
+                scrollTop: $(elem).offset().top
+            }, 2000);
+        */
+        var top = $(elem).offset().top;
+        top = Math.max(1, top-100 );
+
+        /* */
+        $.scrollTo( top , {
+            duration: 1000,
+            easing: 'swing'
+        });
+        
+    }
+        
+        
+    </script>
+	<script type="text/template" id="projectItem">
+                                <div class="col-md-3 col-sm-4 col-xs-6" id="">
+                                	<div class="project-host fade  {4}">
+                                        
+                                        <div class="caption">
+                                            <h3>{1}</h3>
+                                            <p>{2}</p>
+                                            <p><a href="project.html?id={0}" class="learn-more">Learn more</a></p>
+                                        </div>
+                                        
+                                        <img src="{3}">
+                                    </div>
+                                </div>
+    </script>
+    
+    
+    
+    
+    
+    	<style>
+            .project-host{
+                  -webkit-opacity: 1;
+                  -moz-opacity: 1;
+                  opacity: 1;
+                -webkit-transition: all .5s ease;
+                  -moz-transition: all .5s ease;
+                  -ms-transition: all .5s ease;
+                  -o-transition: all .5s ease;
+                  transition: all .5s ease;			
+            }
+            
+            .project-host.project-inactive{
+                  -webkit-opacity: 0.25;
+                  -moz-opacity: 0.25;
+                  opacity: 0.25;
+                -webkit-transition: all .5s ease;
+                  -moz-transition: all .5s ease;
+                  -ms-transition: all .5s ease;
+                  -o-transition: all .5s ease;
+                  transition: all .5s ease;
+            }
+            
+            .project-host{
+                text-align:center; 
+                height: 200px;
+            }
+            .project-host img{
+                max-height: 150px;   
+                padding:10px 0;
+            }
+            
+        </style>    
+
+    
+</head>
+
+<body>   
+
+  <div class="navbar navbar-inverse navbar-fixed-top">
+
+
+	  <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" style="" href="index.html">Nic Colgrove</a>
+
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav pull-right">
+              <li class="scrollTo"><a href="#about">About Me</a></li>
+              <li class="scrollTo"><a href="#education">Education</a></li>
+              <li class="scrollTo"><a href="#experience">Experience</a></li>
+              <li class="scrollTo"><a href="#projects">Projects</a></li>
+              <li class=""><a href="http://cloudedideas.com" target="_blank">CloudedIdeas</a></li>
+            <!-- 
+              <li><a href="tests.php">Visualizations</a></li>
+			-->
+          </ul>
+
+        </div><!--/.nav-collapse -->
+      </div>            
+    </div>
+
+
+
+    
+    
+<!-- Content Area -->
+<div class="container main">
+    
+    <a id="about" class="navPoint"></a>
+    
+            <div class="row">
+                        <div class="col-sm-4 text-center">
+                            <img class="self" src="images/Self_Round.png" alt="Self Image"/>   
+                        </div>
+                        <div class="col-sm-8">
+                            <p>Describe yourself in 3 words...</p>
+                            <h3>creator. &nbsp; developer. &nbsp; organizer. </h3>
+                            <p>As an Application Development Specialist with the University of Nebraska-Lincoln I create unique educational opportunities to support the educational mission.  Prior to this time at the university, I spent 9 years working at Philips Royal Electronics where I specialized in technology systems that interface high-speed production systems across the United States.  I received a Bachelor of Science degree summa cum laude in Computer Systems Technology from Kansas State University, and have several technical and project management certifications.  Currently, I am a candidate for the Masters degree with a major in Leadership Education from the University of Nebraska-Lincoln.</p>
+                            <p>I like to build. I like to do. I like to lead.<p>
+                            	               
+                            <!-- 
+                            <p class="pull-right">
+                                <a href="#" class="btn-custom btn">Download Resume</a>
+                            </p>
+                            -->
+                        </div>
+            </div>
+    
+            <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <hr>
+                        </div>
+            </div>
+            <div class="row">
+                        <div class="col-md-8 col-md-offset-2 text-center">
+                            <a href="https://twitter.com/cloudednic">twitter.</a>  
+                            <a href="http://twitter.com/ncolgrove">facebook.</a>
+                            <a href="http://instagram.com/cloudednic">instagram.</a>
+                        </div>
+            </div>
+
+    
+    <!-- CREATOR -->
+            <div class="row row-parallax" id="parallax-creator" >
+
+                                    <div class="col-sm-6 hidden-xs">
+                                        <div class="parallax-img parallax-creator-img">
+                                        </div> <!--.story-->
+                                   </div>
+                                    <div class="col-sm-6">
+                                        <div class="story">
+                                            <div class="float-left">
+                                            <h1>Creator</h1>
+                                            <p> I like to create something new and capture new ideas.</p>
+                                                <p><a href="">CloudedIdeas.com</a> is my placeholder for thoughts, dreams, and creativity.  Some of these ideas take flight while others fall to the ground.  In flight and failures I strive to create in all ways and in all days. </p>
+                                            </div>
+                                        </div> <!--.story-->
+                                        <div class="parallax-creator-logo hidden-xs"></div>
+                                    </div>
+                                    <div class="col-xs-12 visible-xs">
+                                        <div class="parallax-img parallax-creator-img"></div>
+                                        <div class="parallax-creator-logo"></div>
+                                   </div>
+
+            </div>
+    
+    
+    <!-- DEVELOPER -->
+            <div class="row row-parallax" id="parallax-developer" >
+
+                                    <div class="col-sm-6">
+                                        <div class="story">
+                                            <div class="float-left">
+                                            <h1>Developer</h1>
+                                            <p>Development creates something out of nothing. Code brings new opportunities to life. </p>
+				                            <p>My formal education and career path is in software development. I have experience in several languages and technology. I strive for high quality work that can be a benchmark. See more information on my projects page. </p>                
+                                            </div>
+                                        </div> <!--.story-->
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="parallax-img parallax-developer-img">
+                                        </div> <!--.story-->
+                                    </div>
+                                    <div class="col-md-1 visible-lg visible-md">
+                                        <div class="parallax-img parallax-developer-code">
+                                        </div> <!--.story-->
+                                    </div>
+
+            </div>
+
+    
+
+    
+
+
+    <!-- LEADER -->
+    
+            <div class="row row-parallax" id="parallax-leader" style="position:relative; overflow:hidden;" >
+                                            <div style="left:-250px; top:-50px;position:absolute; display:inline-block ; height: 600px; width:600px;" class="">
+                                                <div data-parRotationSpeed="-1" class="parallax-img parallax-organizer-img2 parallax-rotation">
+                                                </div> <!--.story-->
+                                            </div>
+                                            <div style="left: 250px; top:-50px;position:absolute; display:inline-block ; height: 600px; width:600px;" class="">
+                                                <div data-parRotationSpeed="-1" class="parallax-img parallax-organizer-img2 parallax-rotation">
+                                                </div> <!--.story-->
+                                            </div>
+                                            <div style="top:100px;position:absolute; display:inline-block ; height: 600px; width:600px;" class="">
+                                                <div data-parRotationSpeed=".2" class="parallax-img parallax-organizer-img parallax-rotation">
+                                                </div> <!--.story-->                                                
+                                            </div>
+
+                
+                                    <div class="col-sm-5 hidden-xs">
+                                        <div class="parallax-img parallax-developer-imgX">
+                                        </div> <!--.story-->
+                                    </div>
+
+                                    <div class="col-sm-6 col-sm-offset-1 col-xs-12">
+                                        <div class="story">
+                                            <div class="float-left">
+                                            <h1>Organizer</h1>
+                                            <p>Development creates something out of nothing. Code brings new opportunities to life. </p>
+				                            <p>My formal education and career path is in software development. I have experience in several languages and technology. I strive for high quality work that can be a benchmark. See more information on my projects page. </p>                
+                                            </div>
+                                        </div> <!--.story-->
+                                    </div>
+                                    <div class="col-sm-6 visible-xs">
+                                        <div class="parallax-img parallax-creator-img">
+                                        </div>
+                                        <div class="parallax-creator-logo "></div>
+                                   </div>
+            </div>
+            
+            
+            
+            <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                        </div>
+            </div>
+
+    
+    <a id="education" class="navPoint"></a>
+            <div class="row">
+                        <div class="col-xs-12">
+                            <h1>Education & Training</h1>  
+                        </div>
+            </div>
+            <div class="row">
+                        <div class="col-sm-11 col-sm-offset-1">
+                            <h3>Higher Education</h3>
+                            <p>
+                                <div class="row">
+                                <div class="col-md-2 hidden-sm hidden-xs">
+                                    <img class="" src="images/education_unl.jpg">
+                                </div>
+                                <div class="col-md-10 col-sm-12">
+                                    <b>M.S. in Leadership, Education & Communication</b> <em>(Anticipated 2014)</em>
+                                    <br>University of Nebraska - Lincoln
+                                    <br>24 Cumulative Graduate Hours – 4.0 GPA
+                                </div>
+                                </div>
+                            </p>
+                            <p>
+                                <div class="row">
+                                <div class="col-md-2 hidden-sm hidden-xs">
+                                    <img class="" src="images/education_kstate.jpg">
+                                </div>
+                                <div class="col-md-10 col-sm-12">
+                                    <b>B.S. - Computer Science Technology (Applied Business Minor)</b> <em>(2007)</em>
+                                    <br>Kansas State University 
+                                    <br>133 Cumulative Hours - 4.0 GPA - Summa Cum Laude                            
+                                </div>
+                                </div>
+                            </p>
+
+                            <h3>Certifications</h3>
+                            <p>
+                                <div class="row">
+                                <div class="col-md-2 hidden-sm hidden-xs">
+                                    <img class="" src="images/education_prince2.jpg">
+                                </div>
+                                <div class="col-md-10 col-sm-12">
+                                    <b>PRINCE2 Project Management Foundation & Practitioner Certified</b> <em>(2010)</em>
+                                    <br>Project management with the PRINCE2 management methodology
+                                </div>
+                                </div>
+                            </p>
+                            <p>
+                                <div class="row">
+                                <div class="col-md-2 hidden-sm hidden-xs">
+                                    <img class="" src="images/experience_MCTS_2013.png">
+                                </div>
+                                <div class="col-md-10 col-sm-12">
+                                    <b>Microsoft Certified Technology Specialist</b> <em>(2007)</em>
+                                    <br>Microsoft
+                                </div>
+                                </div>
+                            </p>
+                            <p>
+                                <div class="row">
+                                <div class="col-md-2 hidden-sm hidden-xs">
+                                    <img class="" src="images/experience_MCP_2013.png">
+                                </div>
+                                <div class="col-md-10 col-sm-12">
+                                    <b>Microsoft Certified Professional</b> <em>(2005)</em>
+                                    <br>Microsoft
+                                </div>
+                                </div>
+                            </p>
+                            <p>
+                                <div class="row">
+                                <div class="col-md-2 hidden-sm hidden-xs">
+                                    <img class="" src="images/experience_MCDBA.png">
+                                </div>
+                                <div class="col-md-10 col-sm-12">
+                                    <b>Microsoft Certified Database Administrator</b> <em>(2005)</em>
+                                    <br>Microsoft
+                                </div>
+                                </div>
+                            </p>
+                
+                
+                        </div>
+            </div>
+    
+    
+    
+
+    <a id="experience" class="navPoint"></a>
+            <div class="row">
+                        <div class="col-xs-12">
+                            <h1>Experience</h1>  
+                        </div>
+            </div>
+            <div class="row">
+                        <div class="col-sm-11 col-sm-offset-1">
+                            <h3>Professional Employers</h3>
+                            <p>
+                                <div class="row">
+                                <div class="col-md-2 hidden-sm hidden-xs">
+                                    <img class="" src="images/education_unl.jpg">
+                                </div>
+                                <div class="col-md-10 col-sm-12">
+                                    <b>University of Nebraska - Lincoln</b> <em>(2012 - Present)</em>
+                                    <br><b>Software Development Specialist</b>
+                                    <br><em>Educational Media – Interactive Technology</em>
+                                    <ul>
+                                        <li>Development of web and mobile apps to support the University academic mission
+                                            <br>Technologies Include: PHP, MySQL, Flash, IOS, Android</li>
+                                    </ul>
+                                </div>
+                                </div>
+                            </p>
+                            <p>
+                                <div class="row">
+                                <div class="col-md-2 hidden-sm hidden-xs">
+                                    <img class="" src="images/experience_philips.jpg">
+                                </div>
+                                <div class="col-md-10 col-sm-12">
+                                    <b>Philips</b> <em>(2003 - 2012)</em>
+                                    <br><b>IT Specialist</b>
+                                    <br><em>Global IT Applications – Supply Chain Management</em> (2009 - 2012)
+                                    <ul>
+                                        <li>Application development & support for six North America production facilities</li>
+                                        <li>Custom desktop, web, & windows mobile solutions for internal & external use Factory dashboards; LEAN support; MES transactions; business support</li>
+                                    </ul>
+
+                                    <br><em>Lighting NA, Information Management Center</em> (2007 - 2009)
+                                    <ul>
+                                        <li>Application development leader for three North America production facilities
+                                            <br>Example: Self developed LEAN application netting $19.5M savings since 2007</li>
+                                        <li>Project management and support with global implications
+                                            <br>Example: E-Mail Outlook Conversion Site Leader - 2nd site to complete globally</li>
+                                    </ul>
+
+                                    <br><em>Salina, Kansas IT Department</em> (2003 - 2007)
+                                    <ul>
+                                        <li>75% project based
+                                            <br>Dual cluster MS SQL server setup to support factory wide projects
+                                            <br>Automated production dashboard displaying live metrics (8 factory lines)</li>
+                                        <li>25% Helpdesk & infrastructure support   
+                                            <br>150 desktop; 50 laptop; 18 servers; 20 remote users</li>
+                                    </ul>
+                                </div>
+                                </div>
+                            </p>
+
+                            <!-- -->
+                            <h3>Volunteer Work</h3>
+                            <p>
+                                <div class="row">
+                                <div class="col-md-2 hidden-sm hidden-xs">
+                                    
+                                </div>
+                                <div class="col-md-10 col-sm-12">
+                                    <b>ALEC Steering Committe Member</b> <em>(2012)</em>
+                                    <br>University of Nebraska - Lincoln  - Lincoln, Ne
+                                </div>
+                                </div>
+                            </p>
+                            <p>
+                                <div class="row">
+                                <div class="col-md-2 hidden-sm hidden-xs">
+                                    
+                                </div>
+                                <div class="col-md-10 col-sm-12">
+                                    <b>Technology Advisory Panel  Chairman</b> <em>(2012)</em>
+                                    <br>Belleville High School  - Belleville, Ks
+                                </div>
+                                </div>
+                            </p>
+                            <p>
+                                <div class="row">
+                                <div class="col-md-2 hidden-sm hidden-xs">
+                                    
+                                </div>
+                                <div class="col-md-10 col-sm-12">
+                                    <b>Men’s Ministry Leadership Team</b> <em>(2012)</em>
+                                    <br>Capitol City Christian Church – Lincoln, Ne
+                                </div>
+                                </div>
+                            </p>
+                            <p>
+                                <div class="row">
+                                <div class="col-md-2 hidden-sm hidden-xs">
+                                    
+                                </div>
+                                <div class="col-md-10 col-sm-12">
+                                    <b>Men’s Ministry Administration Team Member</b> <em>(2012)</em>
+                                    <br>Capitol City Christian Church – Lincoln, Ne
+                                </div>
+                                </div>
+                            </p>
+                            <p>
+                                <div class="row">
+                                <div class="col-md-2 hidden-sm hidden-xs">
+                                    
+                                </div>
+                                <div class="col-md-10 col-sm-12">
+                                    <b>Co-Leader Small Group / Bible Study</b> <em>(2012)</em>
+                                    <br>Capitol City Christian Church – Lincoln, Ne
+                                </div>
+                                </div>
+                            </p>
+                            <p>
+                                <div class="row">
+                                <div class="col-md-2 hidden-sm hidden-xs">
+                                    
+                                </div>
+                                <div class="col-md-10 col-sm-12">
+                                    <b>Site Leader - Project Serve</b> <em>(2012)</em>
+                                    <br>Lincoln, Ne
+                                </div>
+                                </div>
+                            </p>
+
+                
+                        </div>
+            </div>
+    
+
+
+    
+
+
+    <a id="projects" class="navPoint"></a>
+            <div class="row">
+                        <div class="col-xs-12">
+                            <h1>Projects & Portfolio</h1>  
+                        </div>
+            </div>
+            <div class="row">
+                        <!--
+                        <div class="col-md-3 text-center">
+                            <div class="hidden-xs hidden-sm">
+                            
+                                <h2>Tags</h2>
+                                <ul>
+                                    <li>Focus
+                                        <ul>
+                                            <li>Professional</li>
+                                            <li>Private</li>
+                                        </ul>
+    
+                                    </li>
+                                    <li>Creativity</li>
+                                    <li>Development</li>
+                                    <li>Leadership</li>
+                                </ul>
+							</div>                            
+                        </div>
+                        -->
+                        <div class="col-md-10 col-md-offset-1">
+                            
+                            <div class="btn-group btn-group-justified">
+                                	<div class="btn btn-block btn-lg btn-custom pFilter" data-toggle="button" project-filter-key="PFcreator">
+                                    	Creator
+                                    </div>
+                                	<div class="btn btn-block btn-lg btn-custom pFilter" data-toggle="button" project-filter-key="PFdeveloper">
+                                    	Developer
+                                    </div>
+                                	<div class="btn btn-block btn-lg btn-custom pFilter" data-toggle="button" project-filter-key="PForganizer">
+                                    	Organizer
+                                    </div>
+                            </div>
+
+
+                        </div>
+                
+                        <div class="col-md-10 col-md-offset-1">                            
+                            <div class="row">
+                                <div class="col-xs-12">
+									<hr>
+                                </div>
+                                
+                                
+                                <div class="col-xs-12 row text-center" id="projectList">
+                                    
+                                    <img src="images/loading.gif" alt="loading">                                
+                                </div>
+                                
+                                <!--
+                                
+                                <div class="col-md-3 col-sm-4 col-xs-6" id="">
+                                	<div class="project-host fade PFcreator PFdeveloper PForganizer">
+                                        
+                                        <div class="caption">
+                                            <h3>Mobile Cattle Tracker</h3>
+                                            <p>Cross Platform App</p>
+                                            <p><a href="#" class="learn-more">Learn more</a></p>
+                                        </div>
+                                        
+                                        <img src="images/project_icon_MobileCattleTracker.png">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFcreator PFdeveloper PForganizer">
+                                    <img src="images/project_icon_Hive.png">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFcreator PFdeveloper PForganizer">
+                                    <img src="images/project_icon_P2P.png">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFdeveloper PForganizer">
+                                    <img src="images/project_icon_ExtensionTV.png">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFcreator PFdeveloper PForganizer">
+                                    <img src="images/project_icon_TheoryTracks.png">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFcreator">
+                                    <img src="images/project_icon_JetWellSoon.jpg">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFcreator PForganizer">
+                                    <img src="images/project_icon_CloudedIdeas.jpg">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFdeveloper">
+                                    <img src="images/project_icon_marketing.jpg">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFcreator PFdeveloper PForganizer">
+                                    <img src="images/bg_developer-img.png">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFcreator PFdeveloper PForganizer">
+                                    <img src="images/project_icon_production.jpg">
+                                    </div>
+                                </div>                            <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFcreator PFdeveloper PForganizer">
+                                    <img src="images/project_icon_Hive.png">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFcreator PFdeveloper PForganizer">
+                                    <img src="images/project_icon_P2P.png">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFdeveloper PForganizer">
+                                    <img src="images/project_icon_ExtensionTV.png">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFcreator PFdeveloper PForganizer">
+                                    <img src="images/project_icon_TheoryTracks.png">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFcreator">
+                                    <img src="images/project_icon_JetWellSoon.jpg">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFcreator PForganizer">
+                                    <img src="images/project_icon_CloudedIdeas.jpg">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFdeveloper">
+                                    <img src="images/project_icon_marketing.jpg">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFcreator PFdeveloper PForganizer">
+                                    <img src="images/bg_developer-img.png">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFcreator PFdeveloper PForganizer">
+                                    <img src="images/project_icon_production.jpg">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFcreator PFdeveloper PForganizer">
+                                    <img src="images/project_icon_CIP.png">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6"> 
+                                	<div class="project-host PFdeveloper PForganizer">
+                                    <img src="images/project_icon_TakeCharge.png">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFcreator PFdeveloper PForganizer">
+                                    <img src="images/project_icon_PhilipsLMS.png">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFcreator PFdeveloper PForganizer">
+                                    <img src="images/project_icon_TeamBoard.png">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFdeveloper">
+                                    <img src="images/project_icon_Sharepoint.png">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                	<div class="project-host PFdeveloper PForganizer">
+                                    <img src="images/project_icon_Overtime.png">
+                                    </div>
+                                </div>
+                                -->
+
+
+
+
+                            </div>
+                
+                
+                        </div>
+            </div>    
+    
+    
+<!--End Content Area --> 
+</div>
+
+
+<!-- Footer -->
+	<div class="footer">
+		<div class="footerBlack">
+	        <p class="muted text-center"><small>NicColgrove.com</small></p>
+		</div>		
+    </div>	    
+</body>
+</html>
+
+
+
+
