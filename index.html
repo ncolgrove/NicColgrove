@@ -140,36 +140,31 @@
     //SET WAYPOINTS FOR THE SCROLL
         $('.navPoint')
           .waypoint(function(direction) {
-            //var $links = $('a[href="#' + this.id + '"]');
-            //$links.toggleClass('active', direction === 'down');
+              //When moving down the page... check for the anchor to be 300px from the top
+              if(direction=="down"){
+                //alert(direction + ' == ' + this.id);
+                setActive( this.id );
+              }
           }, {
-            //context: '#docs',
-            offset: '100%'
+            offset: function() {
+              return 300;
+            }
           })
           .waypoint(function(direction) {
-                //alert('hey');
+              //When moving up the page... check for the anchor to be at the top of the page
+              if(direction=="up"){
+                //alert(direction + ' == ' + this.id);
                 setActive( this.id );
-            //var $links = $('a[href="#' + this.id + '"]');
-            //$links.toggleClass('active', direction === 'up');
+              }
           }, {
-            //context: '#docs',
             offset: function() {
-              return 80;//-$(this).height();
+              return 0;
             }
           });
 
+
         
-        /*function(direction) {
-            id = $(this).id;
-            alert(id);
-            $('.nav li').each(function(n,e){
-               $(this).removeClass('active'); 
-                
-                
-                //alert('Top of thing hit top of viewport.');
-            });
-        });
-        */
+        
         
         
          $('.pFilter').hover( function(){
