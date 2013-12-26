@@ -53,6 +53,24 @@
 					  });
 					};			
         
+    function scrollTo(elem){
+        /*
+            var top = $(elem).offset().top;
+            alert(top);
+            $('html, body').animate({
+                scrollTop: $(elem).offset().top
+            }, 2000);
+        */
+        var top = $(elem).offset().top;
+        top = Math.max(1, top-100 );
+
+        /* */
+        $.scrollTo( top , {
+            duration: 1000,
+            easing: 'swing'
+        });
+        
+    }
         
         
     $(document).ready(function(){
@@ -155,12 +173,12 @@
         
          $('.pFilter').hover( function(){
 			classKey = $(this).attr('project-filter-key');
-			$('.project-host:not(.'+classKey+')').addClass('project-inactive');
+			$('.ProjectHost:not(.'+classKey+')').addClass('project-inactive');
 	   }, 
 	   function(){
 		    if( !$(this).hasClass('active') ){
 				classKey = $(this).attr('project-filter-key');
-				$('.project-host:not(.'+classKey+')').removeClass('project-inactive');		   
+				$('.ProjectHost:not(.'+classKey+')').removeClass('project-inactive');		   
 			}
 	   });
         
@@ -194,7 +212,7 @@
             
             
                 //ADD THE FADE HOVER OPTION
-                $('.fade').hover(
+                $('.ph_frame').hover(
                     function(){
                         $(this).find('.caption').stop( false, true ).fadeIn(250);
                     },
@@ -206,45 +224,19 @@
         
         
         //ADD ELEMENTS TO THE PROJECT LIST
-        
-            
-        
-   
-        
-        
        
-        
-        
     })
     
     
     
-    function scrollTo(elem){
-        /*
-            var top = $(elem).offset().top;
-            alert(top);
-            $('html, body').animate({
-                scrollTop: $(elem).offset().top
-            }, 2000);
-        */
-        var top = $(elem).offset().top;
-        top = Math.max(1, top-100 );
 
-        /* */
-        $.scrollTo( top , {
-            duration: 1000,
-            easing: 'swing'
-        });
-        
-    }
         
         
     </script>
 	<script type="text/template" id="projectItem">
-                                <div class="col-md-3 col-sm-4 col-xs-6" id="">
-                                	<div class="project-host fade  {4}">
-                                        
-                                        <div class="caption">
+                                <div class="ProjectHost col-md-4 col-sm-4 col-xs-6" id="">
+                                    <div class="ph_frame {4}">                                        
+                                        <div class="caption ">
                                             <h3>{1}</h3>
                                             <p>{2}</p>
                                             <p><a href="project.html?id={0}" class="learn-more">Learn more</a></p>
@@ -260,36 +252,98 @@
     
     
     	<style>
-            .project-host{
+            
+            .ProjectHost{
+                    padding-left:0px !important;
+                padding-right:0px !important;
+            }
+            
+            .ProjectHost .ph_frame{
                   -webkit-opacity: 1;
                   -moz-opacity: 1;
                   opacity: 1;
-                -webkit-transition: all .5s ease;
+                  -webkit-transition: all .5s ease;
                   -moz-transition: all .5s ease;
                   -ms-transition: all .5s ease;
                   -o-transition: all .5s ease;
                   transition: all .5s ease;			
             }
             
-            .project-host.project-inactive{
+            .ProjectHost .ph_frame.project-inactive{
                   -webkit-opacity: 0.25;
                   -moz-opacity: 0.25;
                   opacity: 0.25;
-                -webkit-transition: all .5s ease;
+                  -webkit-transition: all .5s ease;
                   -moz-transition: all .5s ease;
                   -ms-transition: all .5s ease;
                   -o-transition: all .5s ease;
                   transition: all .5s ease;
             }
             
-            .project-host{
+            .ProjectHost .ph_frame{
                 text-align:center; 
-                height: 200px;
+                height: 200px !important;
             }
-            .project-host img{
-                max-height: 150px;   
-                padding:10px 0;
+            .ProjectHost img{
+                max-height: 200px;   
+                padding:10px;
             }
+            
+            .ProjectHost .ph_frame{
+                position: relative;
+            }
+            .ProjectHost .ph_frame h4 {
+                font-size: .9em;
+                color: #333;
+                background: #f5f5f5;
+                margin: 0;
+                padding: 10px;
+                border: 1px solid #ddd;
+            }
+             
+            .caption {
+                display: none;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: url(../images/project_trans-black-75.png);
+                width: 100%;
+                height: 100%;
+            }
+            .caption h3, .caption p {
+                color: #fff !important;
+                margin: 20px;
+            }
+            .caption h3 {
+                margin: 20px 20px 10px;
+                text-shadow: 1px 1px 2px #000000;
+            }
+            .caption p {
+                font-size: .75em;
+                line-height: 1.5em;
+                margin: 0 20px 15px;
+            }
+            .caption a.learn-more {
+                position:absolute;
+                bottom:10px;
+                left:5%;
+                width:90%;
+                
+                
+                
+                padding: 5px 10px;
+                background: #08c;
+                color: #fff;
+                border-radius: 2px;
+                -moz-border-radius: 2px;
+                font-weight: bold;
+                text-decoration: none;
+            }
+            .caption a.learn-more:hover {
+                background: #fff;
+                color: #08c;
+            }
+            
             
         </style>    
 
@@ -480,9 +534,9 @@
                             <p>
                                 <div class="row">
                                 <div class="col-md-2 hidden-sm hidden-xs">
-                                    <img class="" src="images/education_unl.jpg">
+                                    <img class="" src="images/education_unl.png">
                                 </div>
-                                <div class="col-md-10 col-sm-12">
+                                <div class="col-md-9  col-md-offset-1 col-sm-12">
                                     <b>M.S. in Leadership, Education & Communication</b> <em>(Anticipated 2014)</em>
                                     <br>University of Nebraska - Lincoln
                                     <br>24 Cumulative Graduate Hours – 4.0 GPA
@@ -494,7 +548,7 @@
                                 <div class="col-md-2 hidden-sm hidden-xs">
                                     <img class="" src="images/education_kstate.jpg">
                                 </div>
-                                <div class="col-md-10 col-sm-12">
+                                <div class="col-md-9 col-md-offset-1 col-sm-12">
                                     <b>B.S. - Computer Science Technology (Applied Business Minor)</b> <em>(2007)</em>
                                     <br>Kansas State University 
                                     <br>133 Cumulative Hours - 4.0 GPA - Summa Cum Laude                            
@@ -505,10 +559,10 @@
                             <h3>Certifications</h3>
                             <p>
                                 <div class="row">
-                                <div class="col-md-2 hidden-sm hidden-xs">
+                                <div class="col-md-3 hidden-sm hidden-xs">
                                     <img class="" src="images/education_prince2.jpg">
                                 </div>
-                                <div class="col-md-10 col-sm-12">
+                                <div class="col-md-9 col-sm-12">
                                     <b>PRINCE2 Project Management Foundation & Practitioner Certified</b> <em>(2010)</em>
                                     <br>Project management with the PRINCE2 management methodology
                                 </div>
@@ -516,10 +570,10 @@
                             </p>
                             <p>
                                 <div class="row">
-                                <div class="col-md-2 hidden-sm hidden-xs">
+                                <div class="col-md-3 hidden-sm hidden-xs">
                                     <img class="" src="images/experience_MCTS_2013.png">
                                 </div>
-                                <div class="col-md-10 col-sm-12">
+                                <div class="col-md-9 col-sm-12">
                                     <b>Microsoft Certified Technology Specialist</b> <em>(2007)</em>
                                     <br>Microsoft
                                 </div>
@@ -527,10 +581,10 @@
                             </p>
                             <p>
                                 <div class="row">
-                                <div class="col-md-2 hidden-sm hidden-xs">
+                                <div class="col-md-3 hidden-sm hidden-xs">
                                     <img class="" src="images/experience_MCP_2013.png">
                                 </div>
-                                <div class="col-md-10 col-sm-12">
+                                <div class="col-md-9 col-sm-12">
                                     <b>Microsoft Certified Professional</b> <em>(2005)</em>
                                     <br>Microsoft
                                 </div>
@@ -538,10 +592,10 @@
                             </p>
                             <p>
                                 <div class="row">
-                                <div class="col-md-2 hidden-sm hidden-xs">
+                                <div class="col-md-3 hidden-sm hidden-xs">
                                     <img class="" src="images/experience_MCDBA.png">
                                 </div>
-                                <div class="col-md-10 col-sm-12">
+                                <div class="col-md-9 col-sm-12">
                                     <b>Microsoft Certified Database Administrator</b> <em>(2005)</em>
                                     <br>Microsoft
                                 </div>
@@ -567,9 +621,9 @@
                             <p>
                                 <div class="row">
                                 <div class="col-md-2 hidden-sm hidden-xs">
-                                    <img class="" src="images/education_unl.jpg">
+                                    <img class="" src="images/education_unl.png">
                                 </div>
-                                <div class="col-md-10 col-sm-12">
+                                <div class="col-md-9 col-md-offset-1 col-sm-12">
                                     <b>University of Nebraska - Lincoln</b> <em>(2012 - Present)</em>
                                     <br><b>Software Development Specialist</b>
                                     <br><em>Educational Media – Interactive Technology</em>
@@ -582,10 +636,10 @@
                             </p>
                             <p>
                                 <div class="row">
-                                <div class="col-md-2 hidden-sm hidden-xs">
-                                    <img class="" src="images/experience_philips.jpg">
+                                <div class="col-md-3 hidden-sm hidden-xs">
+                                    <img class="" src="images/experience_philips.png">
                                 </div>
-                                <div class="col-md-10 col-sm-12">
+                                <div class="col-md-9 col-sm-12">
                                     <b>Philips</b> <em>(2003 - 2012)</em>
                                     <br><b>IT Specialist</b>
                                     <br><em>Global IT Applications – Supply Chain Management</em> (2009 - 2012)

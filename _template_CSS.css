@@ -1,0 +1,121 @@
+      body {
+        padding-top: 60px;
+      }
+
+
+/* Expandable Items */
+.expandableItem-subContent{
+	display:none;
+	margin:10px 0px;
+	cursor:default;	
+}
+.expandableItem-subContent .panel{
+	margin:5px -10px -10px -10px !important;	
+	color:#333 !important;	
+	text-shadow:none !important; 
+	margin-left:20px;
+}
+.expandableItem-subContent .container{
+	width:100%;
+}
+
+
+
+
+/* IFrames */
+.container-3x9 {
+    position: relative;
+    padding-top: 30px; 
+	height: 0; 
+    padding-bottom: 26.25%;
+	overflow: hidden;
+}
+.container-3x9 iframe,
+.container-3x9 video,
+.container-3x9 object,
+.container-3x9 embed {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+	height: 100% !important;
+	border: none;
+	overflow:hidden;
+}
+
+
+
+
+
+
+
+
+
+
+/* COPIED FROM OLD THEORY */
+		body{	font-family:Tahoma, Geneva, sans-serif;}
+		img.external{	max-height:200px; max-width:400px;}
+		div.sub{margin-left:20px;}
+		pre{	font-family:Tahoma, Geneva, sans-serif; white-space:pre-wrap;}
+		.break {page-break-before: always; }
+		p{		margin-top:20px; margin-bottom:0px;}
+		h1{		font-size:3em; margin-bottom:0px;}
+		h2{		font-size:3em; margin-bottom:0px; color:#000; }
+		h3{		font-size:1.5em; margin-bottom:0px; color:#666; margin-left:0px;}
+		h4{		font-size:1em; margin-bottom:0px; color:#666; margin-left:0px;}
+		div.imageHost{text-align:center; float:left; margin:10px;}
+		div.imageHostEnd{clear:both;}
+		div.topHost{float:right;}
+		ul{margin-top:0px;}
+	
+		input[type="button"]{
+			-webkit-appearance: button;
+			width:100%;
+			height:44px;
+		}		
+		.changed{
+			background-color:#FF9;	
+		}	
+		textarea{
+			height:10em;
+		}
+		
+		div.main{
+			margin:0em;	
+		}
+		div.inputs{
+			width:80%;
+			float:left;	
+		}
+		
+		div.buttons{
+			width:20%;
+			float:right;
+		}		
+		div.results{
+			margin:2em;				
+			clear:both;
+		}	
+		div.spacer{
+			margin:2em;
+			clear:both;
+		}			
+		
+		div.inputs ajaxAndFormatHTML.panel.panel-default{
+			border:none !important;	
+		}
+		
+		
+        .tInput{
+            float:left;
+            clear:both;
+            width:100%;
+            text-align:left;
+        }
+        .tSubInput{
+
+        }
+
+		.i80 { display: inline; width:79% }
+		.i20 { display: inline; width:12% }
+		

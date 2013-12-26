@@ -130,7 +130,7 @@
     </script>
 	<script type="text/template" id="projectDesc">
 
-                                <div class="col-sm-3">
+                                <div class="col-sm-3 text-center">
                                     <img src="{3}" alt="{1}">
                                 </div>
                                 <div class="col-sm-9">
@@ -140,7 +140,7 @@
                                 </div>
     </script>
     <script type="text/template" id="projectImage">    
-                                <div class="col-sm-4"><img src="{1}" alt=""></div>
+                                <div class="col-sm-6 project_screenshot"><img src="{1}" alt="" class=""></div>
     </script>
 
     
@@ -176,6 +176,17 @@
                 max-height: 150px;   
                 padding:10px 0;
             }
+            
+            .project_screenshot{
+                padding:10px;
+                margin: 0px;
+                padding-right: 25px;
+            }
+            .project_screenshot img{
+                 border: solid 2px #333;
+   
+            }
+            
             
         </style>    
 
