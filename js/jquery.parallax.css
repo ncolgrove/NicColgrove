@@ -159,9 +159,9 @@
 			
 			
 			
-            #parallax-leader{
+            #parallax-organizer{
                 /*background-color:#edf56c ;*/
-                background:url(../images/bg_leader.jpg) 50% 0 repeat-y;
+                background:url(../images/bg_organizer.jpg) 50% 0 repeat-y;
                 color: white;
                 min-height: 300px;
             }

@@ -49,48 +49,30 @@
 					};			
         
     function scrollTo(elem){
-        /*
-            var top = $(elem).offset().top;
-            alert(top);
-            $('html, body').animate({
-                scrollTop: $(elem).offset().top
-            }, 2000);
-        */
         var top = $(elem).offset().top;
-        top = Math.max(1, top-100 );
+        top = Math.max(1, top-50 );
 
-        /* */
         $.scrollTo( top , {
             duration: 1000,
             easing: 'swing'
         });
-        
     }
         
         
     $(document).ready(function(){
 
-
+    //BROWSER SNIFF FOR MOBILE
+        //Check for mobile webkit
 		var ua = navigator.userAgent,
 		isMobileWebkit = /WebKit/.test(ua) && /Mobile/.test(ua);
 
-
-		
-        /*
-        $('#nav').localScroll(800);
-        
-        //.parallax(xPosition, speedFactor, outerHeight) options:
-        //xPosition - Horizontal position of the element
-        //inertia - speed to move relative to vertical scroll. Example: 0.1 is one tenth the speed of scrolling, 2 is twice the speed of scrolling
-        //outerHeight (true/false) - Whether or not jQuery should use it's outerHeight option to determine when a section is in the viewport
-        */
-		
-		
+        //If mobile device -- add a class to the html tag (will be used in CSS later)
 		if (isMobileWebkit) {
 		  $('html').addClass('mobile');
 		}
-
-
+        
+        
+    //SET THE PARALLAX SCROLLING ITEMS (non mobile only)
         $('html:not(.mobile) #parallax-creator').parallax("50%", -1.1);
         $('html:not(.mobile) .parallax-creator-img').parallax("50%", .5);
 
@@ -100,19 +82,15 @@
         $('html:not(.mobile) .parallax-developer-code').parallax("50%", -3);  
         
         
-        $('html:not(.mobile) #parallax-leader').parallax("50%", .5 );
+        $('html:not(.mobile) #parallax-organizer').parallax("50%", .5 );
         $('html:not(.mobile) .parallax-organizer-img').parallax("50%", .3 );
         $('html:not(.mobile) .parallax-organizer-img2').parallax("50%", .3 );
         $('html:not(.mobile) .parallax-organizer-img3').parallax("50%", .3 );
         
-            
-        /*
-        $('#second').parallax("50%", 0.1);
-        $('.bg').parallax("50%", 0.4);
-        $('#third').parallax("50%", 0.3);
-        */
         
-    //SMOOTH SCROLLING    
+    //ENABLE SMOOTH SCROLLING 
+    //  Note:   The click functions would work without this code block
+    //          The page would simply jump to the correct anchor tag. 
         $('.nav .scrollTo a').click(function(e) {
             e.preventDefault();
             to = $(this).attr('href');
@@ -120,7 +98,29 @@
         });
         
     
-    //SET THE AUTO HIGHLIGHT IN THE TITLE BAR
+    //SET THE AUTO HIGHLIGHT IN THE NAVIGATION BAR
+        //Waypoints capture the current location during scroll
+        $('.navPoint')
+          .waypoint(function(direction) {
+              //When moving down the page... check for the anchor to be 300px from the top
+              if(direction=="down")
+                setActive( this.id );
+          }, {
+            offset: function() {
+                return 300; //Set for 300px down the screen
+            }
+          })
+          .waypoint(function(direction) {
+              //When moving up the page... check for the anchor to be at the top of the page
+              if(direction=="up")
+                setActive( this.id );
+          }, {
+            offset: function() {
+                return 0; //Trigger upon entry
+            }
+          });
+
+        //SetActive highlights the correct navigation button
         function setActive(point){
             $('.scrollTo').each( function(){
                 if( $(this).find('a[href="#' + point + '"]').length > 0){
@@ -130,78 +130,59 @@
                 }
             });
         }
+        
+        
+    //SET THE FILTER BUTTON FUNCTION FOR PROJECTS
+    //  NOTE: There is no "click" assigned.  The "active" class is a trigger for the "setFilter" function.
+        //On hover set the highlight
+        $('.pFilter').hover( function(){
+            //Collect the filter key from the current button
+            classKey = $(this).attr('data-project_filter');
             
+            //Set the filter, add the new class key
+            setFilter(classKey)
+        }, 
+        function(){
+            //Set the filter on mouse out -- include only buttons that are pressed
+            setFilter();
+        });
         
-    //SET WAYPOINTS FOR THE SCROLL
-        $('.navPoint')
-          .waypoint(function(direction) {
-              //When moving down the page... check for the anchor to be 300px from the top
-              if(direction=="down"){
-                //alert(direction + ' == ' + this.id);
-                setActive( this.id );
-              }
-          }, {
-            offset: function() {
-              return 300;
-            }
-          })
-          .waypoint(function(direction) {
-              //When moving up the page... check for the anchor to be at the top of the page
-              if(direction=="up"){
-                //alert(direction + ' == ' + this.id);
-                setActive( this.id );
-              }
-          }, {
-            offset: function() {
-              return 0;
-            }
-          });
+        //Set the filters
+        function setFilter(addClass){
+            //Collect all the filter buttons that are active -- format in a string friendlyw ay
+            arr = $.map( $('.pFilter.active') , function( n, i ) {
+              return ( "." + $(n).attr('data-project_filter') );
+            });
+           
+           //If the param isn't undefined -- add to array
+           if(addClass!=undefined)
+               arr.push('.'+addClass);
+           
+           //Reset all projects to inactive
+            $('.ProjectHost').addClass('project-inactive');
+           
+           //Remove the inactive flag from projects that were selected
+            $('.ProjectHost'+ arr.join("") ).removeClass('project-inactive');
+       }
 
-
         
-        
-        
-        
-         $('.pFilter').hover( function(){
-			classKey = $(this).attr('project-filter-key');
-			$('.ProjectHost:not(.'+classKey+')').addClass('project-inactive');
-	   }, 
-	   function(){
-		    if( !$(this).hasClass('active') ){
-				classKey = $(this).attr('project-filter-key');
-				$('.ProjectHost:not(.'+classKey+')').removeClass('project-inactive');		   
-			}
-	   });
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-                
+    //ADD THE PROJECTS TO THE DOM            
         $.getJSON( "index_projects.json", function( data ) {
-              var items = [];
-              var projectsHTML='';
-            
-            
-            
-              pageTemplate = $('#projectItem').html();	
-            
-              $.each( data.projects , function( key, d ) {
+                //Default variables
+                var items = [];
+                var projectsHTML='';
+                
+                //Locate the page template by ID
+                pageTemplate = $('#projectItem').html();	
+                
+                //Loop through all projects, queue up the HTML
+                $.each( data.projects , function( key, d ) {
                   projectsHTML=projectsHTML+pageTemplate.format(key, d.Title, d.Desc, d.Icon, d.Classes);
-                 
-                //items.push( "<li id='" + key + "'>" + val + "</li>" );
-              });
-
-              $('#projectList').html( projectsHTML );
-
-            
-            
-            
+                });
+                
+                //Add the new html to the DOM
+                $('#projectList').html( projectsHTML );
+                
                 //ADD THE FADE HOVER OPTION
                 $('.ph_frame').hover(
                     function(){
@@ -212,10 +193,6 @@
                     }
                 );    
         });        
-        
-        
-        //ADD ELEMENTS TO THE PROJECT LIST
-       
     })
     
     
@@ -224,9 +201,11 @@
         
         
     </script>
+
+<!-- SCRIPT TEMPLATES -->
 	<script type="text/template" id="projectItem">
-                                <div class="ProjectHost col-md-4 col-sm-4 col-xs-6" id="">
-                                    <div class="ph_frame {4}">                                        
+                                <div class="ProjectHost col-md-4 col-sm-4 col-xs-6 {4}" id="">
+                                    <div class="ph_frame ">                                        
                                         <div class="caption ">
                                             <h3>{1}</h3>
                                             <p>{2}</p>
@@ -260,7 +239,7 @@
                   transition: all .5s ease;			
             }
             
-            .ProjectHost .ph_frame.project-inactive{
+            .ProjectHost.project-inactive .ph_frame{
                   -webkit-opacity: 0.25;
                   -moz-opacity: 0.25;
                   opacity: 0.25;
@@ -345,7 +324,7 @@
 
   <div class="navbar navbar-inverse navbar-fixed-top">
 
-
+<!-- Navigation -->
 	  <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -364,11 +343,7 @@
               <li class="scrollTo"><a href="#experience">Experience</a></li>
               <li class="scrollTo"><a href="#projects">Projects</a></li>
               <li class=""><a href="http://cloudedideas.com" target="_blank">CloudedIdeas</a></li>
-            <!-- 
-              <li><a href="tests.php">Visualizations</a></li>
-			-->
           </ul>
-
         </div><!--/.nav-collapse -->
       </div>            
     </div>
@@ -467,9 +442,9 @@
     
 
 
-    <!-- LEADER -->
+    <!-- ORGANIZER -->
     
-            <div class="row row-parallax" id="parallax-leader" style="position:relative; overflow:hidden;" >
+            <div class="row row-parallax" id="parallax-organizer" style="position:relative; overflow:hidden;" >
                                             <div style="top:100px;position:absolute; display:inline-block ; height: 900px; width:900px;" class="">
                                                 <div data-parRotationSpeed=".05" class="parallax-img parallax-organizer-img3 parallax-rotation">
                                                 </div> <!--.story-->                                                
@@ -503,9 +478,9 @@
                                         </div> <!--.story-->
                                     </div>
                                     <div class="col-sm-6 visible-xs">
-                                        <div class="parallax-img parallax-leader-img">
+                                        <div class="parallax-img parallax-organizer-img">
                                         </div>
-                                        <div class="parallax-leader-logo "></div>
+                                        <div class="parallax-organizer-logo "></div>
                                    </div>
             </div>
             
@@ -771,13 +746,13 @@
                         <div class="col-md-10 col-md-offset-1">
                             
                             <div class="btn-group btn-group-justified">
-                                	<div class="btn btn-block btn-lg btn-custom pFilter" data-toggle="button" project-filter-key="PFcreator">
+                                	<div class="btn btn-block btn-lg btn-custom pFilter" data-toggle="button" data-project_filter="Filter_creator">
                                     	Creator
                                     </div>
-                                	<div class="btn btn-block btn-lg btn-custom pFilter" data-toggle="button" project-filter-key="PFdeveloper">
+                                	<div class="btn btn-block btn-lg btn-custom pFilter" data-toggle="button" data-project_filter="Filter_developer">
                                     	Developer
                                     </div>
-                                	<div class="btn btn-block btn-lg btn-custom pFilter" data-toggle="button" project-filter-key="PForganizer">
+                                	<div class="btn btn-block btn-lg btn-custom pFilter" data-toggle="button" data-project_filter="Filter_organizer">
                                     	Organizer
                                     </div>
                             </div>

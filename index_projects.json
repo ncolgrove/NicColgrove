@@ -4,7 +4,7 @@
         "Title":"Mobile Cattle Tracker",
         "Desc":"Multi Platform App",
         "Icon":"images/project_icon_MobileCattleTracker.png",
-        "Classes":"PFcreator PFdeveloper",
+        "Classes":"Filter_developer",
         "LongDesc":"Field data collection tool for farmers and ranhers with cattle. Track health and birth records of animals in a realtime format.",
         "Link":"",
         "Images":[
@@ -20,7 +20,7 @@
         "Title":"The Hive",
         "Desc":"Multi Platform App",
         "Icon":"images/project_icon_Hive.png",
-        "Classes":"PFdeveloper",
+        "Classes":"Filter_creator Filter_developer",
         "LongDesc":"Assessment tool used for live data collection. Respondents were a variety of ages so an intuitive and responsive design needed to be created for simple data collection.",
         "Link":"",
         "Images":[
@@ -34,7 +34,7 @@
         "Title":"ExtensionTV",
         "Desc":"Website",
         "Icon":"images/project_icon_ExtensionTV.png",
-        "Classes":"PFcreator PFdeveloper PFOrganizer",
+        "Classes":"Filter_creator Filter_developer Filter_organizer",
         "LongDesc":"System built to collect and distribute video content from a variety of sources including youTube, Vimeo, and locally hosted.",
         "Link":"",
         "Images":[
@@ -49,7 +49,7 @@
         "Title":"Pollination to Plate",
         "Desc":"Multiplatform Application",
         "Icon":"images/project_icon_P2P.png",
-        "Classes":"PFdeveloper PForganizer",
+        "Classes":"Filter_developer Filter_creator",
         "LongDesc":"Multiplatform application designed for learning gamification of pollination and foods that result from the different pollination types.",
         "Link":"",
         "Images":[
@@ -64,7 +64,7 @@
         "Title":"Theory Tracks",
         "Desc":"Webpage Application",
         "Icon":"images/project_icon_TheoryTracks.png",
-        "Classes":"PFdeveloper PForganizer",
+        "Classes":"Filter_developer Filter_organizer Filter_creator",
         "LongDesc":"Responsive design web application for students to capture and track theories and concepts.",
         "Link":"",
         "Images":[
@@ -79,7 +79,7 @@
         "Title":"Jet Well Soon",
         "Desc":"Application Concept / Brand",
         "Icon":"images/project_icon_JetWellSoon.png",
-        "Classes":"PFcreator",
+        "Classes":"Filter_creator",
         "LongDesc":"Brand concept for potential travel and health resource site.  ",
         "Link":"",
         "Images":[
@@ -92,7 +92,7 @@
         "Title":"Clouded Ideas",
         "Desc":"Brand Concept",
         "Icon":"images/project_icon_CloudedIdeas.png",
-        "Classes":"PFcreator",
+        "Classes":"Filter_creator",
         "LongDesc":"Personal brand and website. CloudedIdeas is a repository for the ideas and thoughts that come to me in the creative process.  Some ideas take flight while other ideas struggle to get off the ground.",
         "Link":"",
         "Images":[
@@ -106,7 +106,7 @@
         "Title":"CIP Tracking Website",
         "Desc":"Intranet Website",
         "Icon":"images/project_icon_CIP.png",
-        "Classes":"PFdeveloper PForganizer",
+        "Classes":"Filter_developer Filter_organizer",
         "LongDesc":"Intranet website designed to track and encourage Kaizen and Continual Improvement Projects within the Philips production environment and LEAN Manufacturing. <br><br> From 2007 - 2011, over $36 Million has been saved and verified because of this system.  More than 5000 projects are entered with a 95% employee usage rate within the Salina facility.  This system has been used by multiple facilities, and has become the benchmark in Philips for Kaizen and Idea incubation systems.",
         "Link":"",
         "Images":[
@@ -121,7 +121,7 @@
         "Title":"Marketing in a New Era",
         "Desc":"Marketing Simulation Game",
         "Icon":"images/project_icon_marketing.png",
-        "Classes":"PFcreator",
+        "Classes":"Filter_creator Filter_developer",
         "LongDesc":"Agricultural marketing simulation game.  This learning tool works with an existing curriculum to teach agricultural marketing to students through gamification. ",
         "Link":"",
         "Images":[
@@ -140,7 +140,7 @@
         "Title":"Production Reporting Website",
         "Desc":"Intranet Website",
         "Icon":"images/project_icon_production2.png",
-        "Classes":"PFcreator PFdeveloper",
+        "Classes":"Filter_creator Filter_developer",
         "LongDesc":"The Salina Philips facility uses the production tracking on a daily business to record and monitor production entries vs scheduled production.  This is used by the complete management chain as well as hourly workers who perform daily entry.",
         "Link":"",
         "Images":[
@@ -155,7 +155,7 @@
         "Title":"Take Charge Kansas",
         "Desc":"Internet Website",
         "Icon":"images/project_icon_TakeCharge.png",
-        "Classes":"PFcreator PFdeveloper",
+        "Classes":"Filter_creator Filter_developer",
         "Purpose":"Track and display switch status for Kansas energy saving competition",
         "LongDesc":"The not for profit group “climate + energy project” hosted a competition for 6 Kansas communities in 2009 and 16 communities in 2010.  This public webpage hosted over 51,000 switches and 3000 external users.  News coverage was generated across the state of Kansas and reaching news as far as the New York Times.  City and region pages had their own content management system as well as integration with facebook, twitter, and flickr data feeds for live information updates.",
         "Link":"",
@@ -170,7 +170,7 @@
         "Title":"Production Dashboard",
         "Desc":"Intranet Website",
         "Icon":"images/project_icon_dashboarding.png",
-        "Classes":"PFcreator PFdeveloper PForganizer",
+        "Classes":"Filter_creator Filter_developer Filter_organizer",
         "LongDesc":"",
         "Link":"",
         "Images":[
@@ -186,7 +186,7 @@
         "Title":"Mobile LMS",
         "Desc":"Windows Mobile & Intranet Website",
         "Icon":"images/project_icon_PhilipsLMS.png",
-        "Classes":"PFcreator PFdeveloper",
+        "Classes":"Filter_developer",
         "LongDesc":"",
         "Link":"",
         "Images":[
@@ -203,7 +203,7 @@
         "Title":"Zoomable Dashboard Prototype",
         "Desc":"Intranet Website",
         "Icon":"images/project_icon_dashboarding_v2.png",
-        "Classes":"PFcreator PFdeveloper",
+        "Classes":"Filter_creator Filter_developer Filter_organizer",
         "LongDesc":"",
         "Link":"",
         "Images":[
@@ -217,7 +217,7 @@
         "Title":"Overtime Tracking",
         "Desc":"Windows Mobile & Intranet Website",
         "Icon":"images/project_icon_Overtime.png",
-        "Classes":"PFcreator PFdeveloper",
+        "Classes":"Filter_developer",
         "LongDesc":"",
         "Link":"",
         "Images":[
