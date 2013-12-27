@@ -315,6 +315,10 @@
             }
             
             
+            #shareBar img{
+                max-height:25px;
+            }
+            
         </style>    
 
     
@@ -342,7 +346,7 @@
               <li class="scrollTo"><a href="#education">Education</a></li>
               <li class="scrollTo"><a href="#experience">Experience</a></li>
               <li class="scrollTo"><a href="#projects">Projects</a></li>
-              <li class=""><a href="http://cloudedideas.com" target="_blank">CloudedIdeas</a></li>
+              <li class=""><a href="http://cloudedideas.com" target="_blank">CloudedIdeas.com</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>            
@@ -356,7 +360,7 @@
 <div class="container main">
     
     <a id="about" class="navPoint"></a>
-    
+    <!-- ABOUT SECTION -->
             <div class="row">
                         <div class="col-sm-4 text-center">
                             <img class="self" src="images/Self_Round.png" alt="Self Image"/>   
@@ -373,18 +377,24 @@
                             </p>
                             -->
                         </div>
-            </div>
-    
+            </div>    
             <div class="row">
                         <div class="col-md-10 col-md-offset-1">
                             <hr>
                         </div>
             </div>
-            <div class="row">
-                        <div class="col-md-8 col-md-offset-2 text-center">
-                            <a href="https://twitter.com/cloudednic">twitter.</a>  
-                            <a href="http://twitter.com/ncolgrove">facebook.</a>
-                            <a href="http://instagram.com/cloudednic">instagram.</a>
+            <div class="row" id="shareBar" >
+                        <div class="col-xs-3 col-sm-2 col-sm-offset-2 text-center">                            
+                            <a href="https://twitter.com/cloudednic" target="_blank"><img src="images/share_twitter.png"></a>  
+                        </div>
+                        <div class="col-xs-3 col-sm-2 text-center">
+                            <a href="http://instagram.com/cloudednic" target="_blank"><img src="images/share_instagram.png"></a>
+                        </div>
+                        <div class="col-xs-3 col-sm-2 text-center">
+                            <a href="http://facebook.com/nic.colgrove" target="_blank"><img src="images/share_facebook.png"></a>
+                        </div>
+                        <div class="col-xs-3 col-sm-2 text-center">
+                            <a href="http://www.linkedin.com/profile/view?id=41469428" target="_blank"><img src="images/share_linkedin.png"></a>
                         </div>
             </div>
 
@@ -437,13 +447,8 @@
 
             </div>
 
-    
-
-    
-
 
     <!-- ORGANIZER -->
-    
             <div class="row row-parallax" id="parallax-organizer" style="position:relative; overflow:hidden;" >
                                             <div style="top:100px;position:absolute; display:inline-block ; height: 900px; width:900px;" class="">
                                                 <div data-parRotationSpeed=".05" class="parallax-img parallax-organizer-img3 parallax-rotation">
@@ -483,15 +488,9 @@
                                         <div class="parallax-organizer-logo "></div>
                                    </div>
             </div>
-            
-            
-            
-            <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
-                        </div>
-            </div>
 
     
+    <!-- EDUCATION SECTION -->
     <a id="education" class="navPoint"></a>
             <div class="row">
                         <div class="col-xs-12">
@@ -578,7 +577,7 @@
     
     
     
-
+    <!-- EXPERIENCE SECTION -->
     <a id="experience" class="navPoint"></a>
             <div class="row">
                         <div class="col-xs-12">
@@ -590,10 +589,10 @@
                             <h3>Professional Employers</h3>
                             <p>
                                 <div class="row">
-                                <div class="col-md-2 hidden-sm hidden-xs">
-                                    <img class="" src="images/education_unl.png">
+                                <div class="col-md-3 hidden-sm hidden-xs">
+                                    <img class="" src="images/experience_unl.png">
                                 </div>
-                                <div class="col-md-9 col-md-offset-1 col-sm-12">
+                                <div class="col-md-9 col-sm-12">
                                     <b>University of Nebraska - Lincoln</b> <em>(2012 - Present)</em>
                                     <br><b>Software Development Specialist</b>
                                     <br><em>Educational Media – Interactive Technology</em>
@@ -715,7 +714,7 @@
 
     
 
-
+    <!-- PROJECTS SECTION -->
     <a id="projects" class="navPoint"></a>
             <div class="row">
                         <div class="col-xs-12">
@@ -723,28 +722,7 @@
                         </div>
             </div>
             <div class="row">
-                        <!--
-                        <div class="col-md-3 text-center">
-                            <div class="hidden-xs hidden-sm">
-                            
-                                <h2>Tags</h2>
-                                <ul>
-                                    <li>Focus
-                                        <ul>
-                                            <li>Professional</li>
-                                            <li>Private</li>
-                                        </ul>
-    
-                                    </li>
-                                    <li>Creativity</li>
-                                    <li>Development</li>
-                                    <li>Leadership</li>
-                                </ul>
-							</div>                            
-                        </div>
-                        -->
                         <div class="col-md-10 col-md-offset-1">
-                            
                             <div class="btn-group btn-group-justified">
                                 	<div class="btn btn-block btn-lg btn-custom pFilter" data-toggle="button" data-project_filter="Filter_creator">
                                     	Creator
@@ -756,164 +734,17 @@
                                     	Organizer
                                     </div>
                             </div>
-
-
                         </div>
-                
                         <div class="col-md-10 col-md-offset-1">                            
                             <div class="row">
                                 <div class="col-xs-12">
 									<hr>
                                 </div>
-                                
-                                
                                 <div class="col-xs-12 row text-center" id="projectList">
-                                    
+                                    <!-- THIS IMAGE WILL BE REPLACED WITH THE JAVASCRIPT LOAD -->
                                     <img src="images/loading.gif" alt="loading">                                
                                 </div>
-                                
-                                <!--
-                                
-                                <div class="col-md-3 col-sm-4 col-xs-6" id="">
-                                	<div class="project-host fade PFcreator PFdeveloper PForganizer">
-                                        
-                                        <div class="caption">
-                                            <h3>Mobile Cattle Tracker</h3>
-                                            <p>Cross Platform App</p>
-                                            <p><a href="#" class="learn-more">Learn more</a></p>
-                                        </div>
-                                        
-                                        <img src="images/project_icon_MobileCattleTracker.png">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFcreator PFdeveloper PForganizer">
-                                    <img src="images/project_icon_Hive.png">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFcreator PFdeveloper PForganizer">
-                                    <img src="images/project_icon_P2P.png">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFdeveloper PForganizer">
-                                    <img src="images/project_icon_ExtensionTV.png">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFcreator PFdeveloper PForganizer">
-                                    <img src="images/project_icon_TheoryTracks.png">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFcreator">
-                                    <img src="images/project_icon_JetWellSoon.jpg">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFcreator PForganizer">
-                                    <img src="images/project_icon_CloudedIdeas.jpg">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFdeveloper">
-                                    <img src="images/project_icon_marketing.jpg">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFcreator PFdeveloper PForganizer">
-                                    <img src="images/bg_developer-img.png">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFcreator PFdeveloper PForganizer">
-                                    <img src="images/project_icon_production.jpg">
-                                    </div>
-                                </div>                            <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFcreator PFdeveloper PForganizer">
-                                    <img src="images/project_icon_Hive.png">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFcreator PFdeveloper PForganizer">
-                                    <img src="images/project_icon_P2P.png">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFdeveloper PForganizer">
-                                    <img src="images/project_icon_ExtensionTV.png">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFcreator PFdeveloper PForganizer">
-                                    <img src="images/project_icon_TheoryTracks.png">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFcreator">
-                                    <img src="images/project_icon_JetWellSoon.jpg">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFcreator PForganizer">
-                                    <img src="images/project_icon_CloudedIdeas.jpg">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFdeveloper">
-                                    <img src="images/project_icon_marketing.jpg">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFcreator PFdeveloper PForganizer">
-                                    <img src="images/bg_developer-img.png">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFcreator PFdeveloper PForganizer">
-                                    <img src="images/project_icon_production.jpg">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFcreator PFdeveloper PForganizer">
-                                    <img src="images/project_icon_CIP.png">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-xs-6"> 
-                                	<div class="project-host PFdeveloper PForganizer">
-                                    <img src="images/project_icon_TakeCharge.png">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFcreator PFdeveloper PForganizer">
-                                    <img src="images/project_icon_PhilipsLMS.png">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFcreator PFdeveloper PForganizer">
-                                    <img src="images/project_icon_TeamBoard.png">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFdeveloper">
-                                    <img src="images/project_icon_Sharepoint.png">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                	<div class="project-host PFdeveloper PForganizer">
-                                    <img src="images/project_icon_Overtime.png">
-                                    </div>
-                                </div>
-                                -->
-
-
-
-
                             </div>
-                
-                
                         </div>
             </div>    
     
