@@ -65,11 +65,13 @@ http://www.gnu.org/licenses/gpl.html
                     if(speed==undefined)speed=1;
                     
                     rotation = pos * speed;
+                                        
                     $this
                             .css('transform','rotate('+rotation+'deg);')
                             .css('-ms-transform','rotate('+rotation+'deg)')
                             .css('-webkit-transform','rotate('+rotation+'deg)')
-                            .css("-webkit-transform-origin", "50% 50%");
+                            .css("-webkit-transform-origin", "50% 50%")
+                            .css('-moz-transform','rotate('+rotation+'deg)');
                 }else{                    
                     $this.css('backgroundPosition', xpos + " " + Math.round((firstTop - pos) * speedFactor) + "px");
                 }
