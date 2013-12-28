@@ -3,14 +3,23 @@
         //BROWSER SNIFF FOR MOBILE
             //Check for mobile webkit
             var ua = navigator.userAgent,
-            isMobileWebkit = /WebKit/.test(ua) && /Mobile/.test(ua);
-    
+            isMobileWebkit = /WebKit/.test(ua) && /Mobile/.test(ua),
+            isMSIE = (/MSIE (\d+\.\d+);/.test(ua)); 
+        
+        
+        
             //If mobile device -- add a class to the html tag (will be used in CSS later)
             if (isMobileWebkit) {
               $('html').addClass('mobile');
             }
             
-            
+            //If internet explorer -- add a class to the html tag (will be used in CSS later)
+            if (isMobileWebkit) {
+              $('html').addClass('msie');
+            }
+
+        
+        
         //SET THE PARALLAX SCROLLING ITEMS (non mobile only)
             $('html:not(.mobile) #parallax-creator').parallax("50%", -1.1);
             $('html:not(.mobile) .parallax-creator-img').parallax("50%", .5);
@@ -25,12 +34,12 @@
             $('html:not(.mobile) .parallax-organizer-img').parallax("50%", .3 );
             $('html:not(.mobile) .parallax-organizer-img2').parallax("50%", .3 );
             $('html:not(.mobile) .parallax-organizer-img3').parallax("50%", .3 );
-            
+    
             
         //ENABLE SMOOTH SCROLLING 
         //  Note:   The click functions would work without this code block
         //          The page would simply jump to the correct anchor tag. 
-            $('.nav .scrollTo a').click(function(e) {
+            $('html:not(.mobile) .nav .scrollTo a').click(function(e) {
                 e.preventDefault();
                 to = $(this).attr('href');
                 scrollTo(to); 

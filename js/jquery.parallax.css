@@ -111,6 +111,11 @@
                 background:url(../images/bg_organizer-img-xlarge.png) no-repeat;
                 background-size: 100%; 
             }
+            .parallax-organizer-img-xs{
+                background:url(../images/bg_organizer_gears_together.png) no-repeat;
+                background-size: 100%; 
+    
+            }
 
 
 
