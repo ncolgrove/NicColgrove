@@ -1,32 +1,3 @@
-      body {
-        padding-top: 60px;
-      }
-
-
-
-
-
-
-/* IFrames */
-.container-3x9 {
-    position: relative;
-    padding-top: 30px; 
-	height: 0; 
-    padding-bottom: 26.25%;
-	overflow: hidden;
-}
-.container-3x9 iframe,
-.container-3x9 video,
-.container-3x9 object,
-.container-3x9 embed {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-	height: 100% !important;
-	border: none;
-	overflow:hidden;
-}
 
 
 
@@ -37,13 +8,5 @@
 
 
 
-/* COPIED FROM OLD THEORY */
-		body{	font-family:Tahoma, Geneva, sans-serif;}
-		pre{	font-family:Tahoma, Geneva, sans-serif; white-space:pre-wrap;}
-		.break {page-break-before: always; }
-		p{		margin-top:20px; margin-bottom:0px;}
-		h1{		font-size:3em; margin-bottom:0px;}
-		h2{		font-size:3em; margin-bottom:0px; color:#000; }
-		h3{		font-size:1.5em; margin-bottom:0px; color:#666; margin-left:0px;}
-		h4{		font-size:1em; margin-bottom:0px; color:#666; margin-left:0px;}
-	
+
+

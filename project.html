@@ -5,129 +5,42 @@
     <title>Nic Colgrove</title>
     
     <!--Icons -->
-    <!--
-        WILL NEED TO DEFINE
-            <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://proola.com/assets/ico/bub.jpg">
-            <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://proola.com/assets/ico/bub.jpg">
-            <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://proola.com/assets/ico/bub.jpg">
-            <link rel="apple-touch-icon-precomposed" href="http://proola.com/assets/ico/bub.jpg">
-            <link rel="shortcut icon" href="http://proola.com/assets/ico/bub.jpg">
-    -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/icon_nc_144.jpg">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/icon_nc_114.jpg">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/icon_nc_72.jpg">
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="images/icon_nc_57.jpg">
+    <link rel="apple-touch-icon-precomposed" sizes="32x32" href="images/icon_nc_32.jpg">
+    <link rel="shortcut icon" href="images/icon_nc_32.jpg">
     
+    
+    <!--Mobile Sizing -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     
-    <!-- Bootstrap links -->    
+    <!-- js extensions -->
+    <script src="js/js.simpleTemplate.js"></script>
+
+    
+    <!-- jQuery frameworks -->    
     <script type="text/javascript" src="js/lib/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="js/jquery.scrollTo.js"></script>
     <script type="text/javascript" src="js/jquery.waypoints.js"></script>
-
     
+    
+    <!-- Bootstrap links -->    
     <link rel="stylesheet" href="css/bootstrap-3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-3.0/css/bootstrap-theme.min.css">
-    
-    
     <script src="css/bootstrap-3.0/js/bootstrap.min.js"></script>
-    
-    <link href="_template_CSS.css" rel="stylesheet">
-    <link href="css/custom.css" rel="stylesheet" media="screen">
-<!--
-    <script type="text/javascript" src="_template_JS.js"></script>
--->    
 
     
-    <script src="js/jquery.parallax.js"></script>
-    <link href="js/jquery.parallax.css" rel="stylesheet" media="screen">
+    <!-- Custom Components -->    
+    <script src="project.js"></script>
+    <link href="css/custom.css" rel="stylesheet" media="screen">    
 
     
     
-    <script type="text/javascript">
 
-        
-					String.prototype.format = function() {
-					  var args = arguments;
-					  return this.replace(/{(\d+)}/g, function(match, number) { 
-						return typeof args[number] != 'undefined'
-						  ? args[number]
-						  : match
-						;
-					  });
-					};			
-        
-        
-        
-    $(document).ready(function(){
-
-
-		var ua = navigator.userAgent,
-		isMobileWebkit = /WebKit/.test(ua) && /Mobile/.test(ua);
-        
-        
-        var id = getURLParameter('id');
-        
-        $.getJSON( "index_projects.json", function( data ) {
-              var items = [];
-              var projectsHTML='';
-              var imagesHTML='';
-              var d;
-            
-              //Load the js templates
-              pageTemplate = $('#projectDesc').html();	
-              imageTemplate = $('#projectImage').html();	
-
-              d = data.projects[id];
-              projectsHTML=projectsHTML+pageTemplate.format(id, d.Title, d.Desc, d.Icon, d.LongDesc);
-              $('#projectInfoHost').append( projectsHTML );
-
-            
-            //Template the images
-              $.each( data.projects[id].Images , function( key, d ) {
-                  imagesHTML=imagesHTML+imageTemplate.format(key, d.Path);     
-              });
-              $('#projectImageHost').append( (imagesHTML)   );
-
-            
-            
-            
-            
-            
-            
-                //ADD THE FADE HOVER OPTION
-                $('.fade').hover(
-                    function(){
-                        $(this).find('.caption').stop( false, true ).fadeIn(250);
-                    },
-                    function(){
-                        $(this).find('.caption').stop( false, true ).fadeOut(250);
-                    }
-                );    
-        });        
-        
-        
-
-        //ADJUST MENU OPTIONS ACCORDINGLY
-        $('.scrollTo a').each( function(){
-            $(this).attr('href', 'index.html'+ $(this).attr('href') );
-        });
-
-            
-        
-   
-        
-        
-       
-        
-        
-    })
-    
-    
-    function getURLParameter(name) {
-        return decodeURI(
-            (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
-        );
-    }
-        
-        
-    </script>
+<!-- JAVASCRIPT STRING TEMPLATES (REFERENCED BY ID) -->
 	<script type="text/template" id="projectDesc">
 
                                 <div class="col-sm-3 text-center">
@@ -142,62 +55,11 @@
     <script type="text/template" id="projectImage">    
                                 <div class="col-sm-6 project_screenshot"><img src="{1}" alt="" class=""></div>
     </script>
-
-    
-    
-    	<style>
-            .project-host{
-                  -webkit-opacity: 1;
-                  -moz-opacity: 1;
-                  opacity: 1;
-                -webkit-transition: all .5s ease;
-                  -moz-transition: all .5s ease;
-                  -ms-transition: all .5s ease;
-                  -o-transition: all .5s ease;
-                  transition: all .5s ease;			
-            }
-            
-            .project-host.project-inactive{
-                  -webkit-opacity: 0.25;
-                  -moz-opacity: 0.25;
-                  opacity: 0.25;
-                -webkit-transition: all .5s ease;
-                  -moz-transition: all .5s ease;
-                  -ms-transition: all .5s ease;
-                  -o-transition: all .5s ease;
-                  transition: all .5s ease;
-            }
-            
-            .project-host{
-                text-align:center; 
-                height: 200px;
-            }
-            .project-host img{
-                max-height: 150px;   
-                padding:10px 0;
-            }
-            
-            .project_screenshot{
-                padding:10px;
-                margin: 0px;
-                padding-right: 25px;
-            }
-            .project_screenshot img{
-                 border: solid 2px #333;
-   
-            }
-            
-            
-        </style>    
-
-    
 </head>
-
 <body>   
 
+<!-- Navigation -->
   <div class="navbar navbar-inverse navbar-fixed-top">
-
-
 	  <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -215,29 +77,22 @@
               <li class="scrollTo"><a href="#education">Education</a></li>
               <li class="scrollTo"><a href="#experience">Experience</a></li>
               <li class="scrollTo"><a href="#projects">Projects</a></li>
-              <li class=""><a href="http://cloudedideas.com" target="_blank">CloudedIdeas</a></li>
-            <!-- 
-              <li><a href="tests.php">Visualizations</a></li>
-			-->
+              <li class=""><a href="http://cloudedideas.com" target="_blank">CloudedIdeas.com</a></li>
           </ul>
-
         </div><!--/.nav-collapse -->
       </div>            
     </div>
 
-
-
     
     
 <!-- Content Area -->
-<div class="container main"> 
-            <div class="row" id="projectInfoHost">
-            </div>    
-            <hr>
-            <div class="row" id="projectImageHost">
-            </div>
-<!--End Content Area --> 
-</div>
+    <div class="container main"> 
+                <div class="row" id="projectInfoHost">
+                </div>    
+                <hr>
+                <div class="row" id="projectImageHost">
+                </div>
+    </div>
 
 
 <!-- Footer -->
@@ -246,6 +101,9 @@
 	        <p class="muted text-center"><small>NicColgrove.com</small></p>
 		</div>		
     </div>	    
+    <?php include_once("php/analyticstracking.php") ?>
+
+    
 </body>
 </html>
 
