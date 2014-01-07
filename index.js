@@ -39,12 +39,13 @@
         //ENABLE SMOOTH SCROLLING 
         //  Note:   The click functions would work without this code block
         //          The page would simply jump to the correct anchor tag. 
-            $('html:not(.mobile) .nav .scrollTo a').click(function(e) {
+            $('html:not(.mobile) a.scrollTo').click(function(e) {
                 e.preventDefault();
                 to = $(this).attr('href');
                 scrollTo(to); 
             });
-    
+        
+        
             function scrollTo(elem){
                 var top = $(elem).offset().top;
                 top = Math.max(1, top-50 );
@@ -83,11 +84,11 @@
     
             //SetActive highlights the correct navigation button
             function setActive(point){
-                $('.scrollTo').each( function(){
+                $('.nav li').each( function(){
                     if( $(this).find('a[href="#' + point + '"]').length > 0){
-                        $(this).addClass('active');
+                        $(this).closest('li').addClass('active');
                     }else{
-                        $(this).removeClass('active');
+                        $(this).closest('li').removeClass('active');
                     }
                 });
             }

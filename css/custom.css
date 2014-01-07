@@ -180,6 +180,15 @@
       max-width: 100%;
       vertical-align: middle;
     }
+	.hideLinks a{
+        text-decoration:none;
+        font-weight:200;
+        color:#0E76BC;
+	}
+	.hideLinks a:hover{
+        text-decoration:underline;
+	}
+	
 
 
 
